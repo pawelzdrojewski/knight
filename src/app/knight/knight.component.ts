@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { interval } from 'rxjs';
+import { interval, take } from 'rxjs';
 
 @Component({
   selector: 'app-knight',
@@ -31,26 +31,26 @@ export class KnightComponent implements OnInit {
 
     const horse:  string = "♞";
     matrix[x][y] = horse;
-   // matrix[ruch[0].X][ruch[0].Y] = horse;
-  //  matrix[ruch[1].X][ruch[1].Y] = horse;
-  //  matrix[ruch[2].X][ruch[2].Y] = horse;
-  //  matrix[ruch[3].X][ruch[3].Y] = horse;
- //   matrix[ruch[4].X][ruch[4].Y] = horse;
-  //  matrix[ruch[5].X][ruch[5].Y] = horse;
-  //  matrix[ruch[6].X][ruch[6].Y] = horse;
-  //  matrix[ruch[7].X][ruch[7].Y] = horse;
+   matrix[ruch[0].X][ruch[0].Y] = horse;
+   matrix[ruch[1].X][ruch[1].Y] = horse;
+   matrix[ruch[2].X][ruch[2].Y] = horse;
+   matrix[ruch[3].X][ruch[3].Y] = horse;
+   matrix[ruch[4].X][ruch[4].Y] = horse;
+   matrix[ruch[5].X][ruch[5].Y] = horse;
+   matrix[ruch[6].X][ruch[6].Y] = horse;
+   matrix[ruch[7].X][ruch[7].Y] = horse;
     
-    const obj = interval(1000);
-    //const zakres = obj.s
-    obj.subscribe((a) => {
-      if(matrix[x][y] === '') {
-        matrix[x][y] = horse
-      } else
-        if(matrix[ruch[0].X][ruch[0].Y] !=''){
-          matrix[ruch[0].X][ruch[0].Y] = horse
-        }
+     const obj = interval(1000);
+    const zakres = obj.pipe(take(8));
+     zakres.subscribe((a) => {  return matrix[a][a] = horse});
+      // if(matrix[x][y] === '') {
+      //   matrix[x][y] = horse
+      // } else
+      //   if(matrix[ruch[0].X][ruch[0].Y] !=''){
+      //     matrix[ruch[0].X][ruch[0].Y] = horse
+      //   }
     
-      });
+      // });
 
         
         
