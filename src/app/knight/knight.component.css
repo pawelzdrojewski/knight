@@ -1,0 +1,19 @@
+.kontener{
+    margin: 10% 10% 10% 18%;
+}
+.szachy {
+	border:solid 1px #777;
+}
+.szachy td {
+	width:36px;
+	height:36px;
+	text-align: center;
+	vertical-align: middle;
+	font-size:20px;
+}
+.szachy tr:nth-child(odd) td:nth-child(even) {
+	background: #ccc;
+}
+.szachy tr:nth-child(even) td:nth-child(odd) {
+	background: #ccc;
+}
