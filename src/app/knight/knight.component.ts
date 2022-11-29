@@ -12,11 +12,11 @@ export class KnightComponent implements OnInit {
   x: number = 4;
   n: number = 0;
   a: number = 10;
-  constructor() {
-   }
 
-  ngOnInit(): void {
-  }
+
+  constructor() {}
+
+  ngOnInit(): void {}
 
   matrix: string[][] = [[],[],[],[],[],[],[],[]];
   linear: string[] = [];
@@ -32,10 +32,22 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) },
                { X: (this.x-1), Y: (this.y-2) },
                { X: (this.x-2), Y: (this.y-1) }
               ];
+              z: number =4; v: number = 5;
+              ruch2: ruch[] =[{ X: (this.z  ), Y: (this.v  ) },
+                { X: (this.z-2), Y: (this.v+1) },
+                { X: (this.z-1), Y: (this.v+2) },
+                { X: (this.z+1), Y: (this.v+2) },
+                { X: (this.z+2), Y: (this.v+1) },
+                { X: (this.z+2), Y: (this.v-1) },
+                { X: (this.z+1), Y: (this.v-2) },
+                { X: (this.z-1), Y: (this.v-2) },
+                { X: (this.z-2), Y: (this.v-1) }
+               ];
+
 
 kolejny: ruch ={ X: (this.x), Y: (this.y+2) }
 
-ruch2: ruch[] = [...this.ruch, this.kolejny];
+//ruch2: ruch[] = [...this.ruch, this.kolejny];
 
   start(x: number, y: number, matrix: string[][], n: number){
     this.test(x, y, matrix);
@@ -44,40 +56,23 @@ ruch2: ruch[] = [...this.ruch, this.kolejny];
       matrix[x][y] = `${this.n}`
       console.log(`n: ${this.n}`);
       this.x= x-2; y = this.y+1;
-     // this.start(this.x, this.y, matrix, this.n);
       
-    } //else 
-   // return this.n;
+    }
 
   }
   test(x: number, y: number, matrix: string[][]){
     this.krok(this.ruch2, this.n);
-   // this.krok(this.ruch, this.n);
+    this.krok(this.ruch, this.n);
   }
-  zeruj = function(matrix: string[][]){ 
-   // for(let i=0)
-  } 
-  // experyment(matrix: string[][],n: number){
-
-  //   for(let i=0; i<= 7; i++){
-  //     for(let j=0; j<= 7; j++){
-  //       this.linear[n] = `${n}`;
-   
-  //        this.krok();
-  //     }
-  //   }
-  
- // }
+ 
   krok(ruch: ruch[], n: number){
     const obj = interval(1000);
     const zakres = obj.pipe(take(11));
-    // zakres.subscribe(() =>{});
-      //zakres.subscribe((a) => {this.matrix[Math.min(Math.round((a/8)-0.4))][a%8]= `${n++}`; this.a = a});
-      zakres.subscribe((a) => {this.matrix[ruch[a].X][ruch[a].Y]= `${n++}`; this.a = a});
+    zakres.subscribe((a) => {this.matrix[ruch[a].X][ruch[a].Y]= `${n++}`; this.a = a});
   }
+  zeruj(m: string[][]){}
   
 }
-
 
 interface ruch{
   X: number;
@@ -86,43 +81,3 @@ interface ruch{
 interface start{
   (x:  number, y: number, matrix: string[][], n: number): number;
 }
-
-// start = function(x: number, y: number, matrix: string[][]){
-//   const ruch: ruch[] =[{ X: (x-2), Y: (y+1) },
-//                        { X: (x-1), Y: (y+2) },
-//                        { X: (x+1), Y: (y+2) },
-//                        { X: (x+2), Y: (y+1) },
-//                        { X: (x+2), Y: (y-1) },
-//                        { X: (x+1), Y: (y-2) },
-//                        { X: (x-1), Y: (y-2) },
-//                        { X: (x-2), Y: (y-1) }
-//                       ];
-
-//   const horse:  string = "♞";
-//   matrix[x][y] = horse;
-//  matrix[ruch[0].X][ruch[0].Y] = horse;
-//  matrix[ruch[1].X][ruch[1].Y] = horse;
-//  matrix[ruch[2].X][ruch[2].Y] = horse;
-//  matrix[ruch[3].X][ruch[3].Y] = horse;
-//  matrix[ruch[4].X][ruch[4].Y] = horse;
-//  matrix[ruch[5].X][ruch[5].Y] = horse;
-//  matrix[ruch[6].X][ruch[6].Y] = horse;
-//  matrix[ruch[7].X][ruch[7].Y] = horse;
-  
-//    const obj = interval(1000);
-//   const zakres = obj.pipe(take(8));
-//    zakres.subscribe((a) => {  return matrix[a][a] = horse});
-//     // if(matrix[x][y] === '') {
-//     //   matrix[x][y] = horse
-//     // } else
-//     //   if(matrix[ruch[0].X][ruch[0].Y] !=''){
-//     //     matrix[ruch[0].X][ruch[0].Y] = horse
-//     //   }
-  
-//     // });
-
-      
-      
-//     //  matrix[ruch[x].X][ruch[y].Y] = horse; x++; y++ }); 
-
-// }
