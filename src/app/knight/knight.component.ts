@@ -32,17 +32,6 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) },
                { X: (this.x-1), Y: (this.y-2) },
                { X: (this.x-2), Y: (this.y-1) }
               ];
-              z: number =4; v: number = 5;
-              ruch2: ruch[] =[{ X: (this.z  ), Y: (this.v  ) },
-                { X: (this.z-2), Y: (this.v+1) },
-                { X: (this.z-1), Y: (this.v+2) },
-                { X: (this.z+1), Y: (this.v+2) },
-                { X: (this.z+2), Y: (this.v+1) },
-                { X: (this.z+2), Y: (this.v-1) },
-                { X: (this.z+1), Y: (this.v-2) },
-                { X: (this.z-1), Y: (this.v-2) },
-                { X: (this.z-2), Y: (this.v-1) }
-               ];
 
 
 kolejny: ruch ={ X: (this.x), Y: (this.y+2) }
@@ -61,13 +50,13 @@ kolejny: ruch ={ X: (this.x), Y: (this.y+2) }
 
   }
   test(x: number, y: number, matrix: string[][]){
-    this.krok(this.ruch2, this.n);
+   // this.krok(this.ruch2, this.n);
     this.krok(this.ruch, this.n);
   }
  
   krok(ruch: ruch[], n: number){
     const obj = interval(1000);
-    const zakres = obj.pipe(take(11));
+    const zakres = obj.pipe(take(9));
     zakres.subscribe((a) => {this.matrix[ruch[a].X][ruch[a].Y]= `${n++}`; this.a = a});
   }
   zeruj(m: string[][]){}
