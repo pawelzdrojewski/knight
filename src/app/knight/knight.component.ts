@@ -39,14 +39,12 @@ kolejny: ruch ={ X: (this.x), Y: (this.y+2) }
 //ruch2: ruch[] = [...this.ruch, this.kolejny];
 
   start(x: number, y: number, matrix: string[][], n: number){
-    this.test(x, y, matrix);
-    if(matrix[x][y]!= ''){
-     this.n=n+1;
-      matrix[x][y] = `${this.n}`
-      console.log(`n: ${this.n}`);
-      this.x= x-2; y = this.y+1;
+
+    // if((x<0||x>7||y<0||y>7){
+    //   this.matrix[x][y] = `${n++}`;
+    // } else {}
       
-    }
+    //}
 
   }
   test(x: number, y: number, matrix: string[][]){
