@@ -1,6 +1,8 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { interval, startWith, take } from 'rxjs';
+import { interval, take } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-knight',
@@ -8,63 +10,139 @@ import { interval, startWith, take } from 'rxjs';
   styleUrls: ['./knight.component.css']
 })
 export class KnightComponent implements OnInit {
-  y: number = 3;
-  x: number = 4;
+  y: number = 0;
+  x: number = 7;
   n: number = 0;
-  a: number = 10;
+  a: number = 8;
+  b: number = 8;
 
 
   constructor() {}
 
   ngOnInit(): void {}
-
-  matrix: string[][] = [[],[],[],[],[],[],[],[]];
-  linear: string[] = [];
+//
+  //matrix: string[][] = [[],[],[],[],[],[],[],[]];
+ // linear: string[] = [];
  // const horse:  string = "♞";
+ //matrix: krok[][] = [[],[],[],[],[],[],[],[]];
+ matrix: string[][] = [[],[],[],[],[],[],[],[]];
 
-ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) },
-               { X: (this.x-2), Y: (this.y+1) },
-               { X: (this.x-1), Y: (this.y+2) },
-               { X: (this.x+1), Y: (this.y+2) },
-               { X: (this.x+2), Y: (this.y+1) },
-               { X: (this.x+2), Y: (this.y-1) },
-               { X: (this.x+1), Y: (this.y-2) },
-               { X: (this.x-1), Y: (this.y-2) },
-               { X: (this.x-2), Y: (this.y-1) }
-              ];
+ flat_matrix: number[] = [];
+ //trasa: number[] =[];
+
+ kroki: krok[] = [];
 
 
-kolejny: ruch ={ X: (this.x), Y: (this.y+2) }
+ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
+               { X: (this.x-2), Y: (this.y+1) }, //1
+               { X: (this.x-1), Y: (this.y+2) }, //2
+               { X: (this.x+1), Y: (this.y+2) }, //3
+               { X: (this.x+2), Y: (this.y+1) }, //4
+               { X: (this.x+2), Y: (this.y-1) }, //5
+               { X: (this.x+1), Y: (this.y-2) }, //6
+               { X: (this.x-1), Y: (this.y-2) }, //7
+               { X: (this.x-2), Y: (this.y-1) }  //8
+            ];
 
-//ruch2: ruch[] = [...this.ruch, this.kolejny];
+  trasa(x: number, y: number, n: number){
+    this.matrix[x][y] = `${n}`;
+    this.kroki.push({X: x, Y: y});
+   // console.log(`n:${this.matrix[x][y]} x:${x} y:${y}`);
+    if(x-2>=0 && x-2<=7 && y+1>=0 && y+1<=7 && this.matrix[x-2][y+1] != ``){
+        x = x-2; y = y+1; n++;
+        this.kroki.push({X: x, Y: y});
+        this.matrix[x][y] = `${n}`;
+        console.log(`1 n:${this.matrix[x][y]} x:${x} y:${y}`);
+        this.trasa(x, y, n)
+    }
+    if (x-1>=0 && x-1<=7 && y+2>=0 && y+2<=7 && this.matrix[x-1][y+2] != ``) {
+        x = x-1; y = y+2; n++;
+        this.kroki.push({X: x, Y: y});
+         this.matrix[x][y] = `${n}`;
+         console.log(`2 n:${this.matrix[x][y]} x:${x} y:${y}`);
+         this.trasa(x, y, n)
+    }
+    if (x+1>=0 && x+1<=7 && y+2>=0 && y+2<=7 && this.matrix[x+1][y+2] != ``) { 
+        x = x+1; y = y+2; n++;
+        this.kroki.push({X: x, Y: y});
+        this.matrix[x][y] = `${n}`;
+        console.log(`3 n:${this.matrix[x][y]} x:${x} y:${y}`);
+        this.trasa(x, y, n)
+    }
+    if (x+2>=0 && x+2<=7 && y+1>=0 && y+1<=7 && this.matrix[x+2][y+1] != ``) {
+        x = x+2; y = y+1; n++;
+        this.matrix[x][y] = `${n}`;
+        this.kroki.push({X: x, Y: y});
+        console.log(`4 n:${this.matrix[x][y]} x:${x} y:${y}`);
+        this.trasa(x, y, n);
+    }
+    if (x+2>=0 && x+2<=7 && y-1>=0 && y-1<=7 && this.matrix[x+2][y-1] != ``) {
+        x = x+2; y = y-1; n++;
+        this.kroki.push({X: x, Y: y});
+        this.matrix[x][y] = `${n}`;
+        console.log(`5 n:${this.matrix[x][y]} x:${x} y:${y}`);
+        this.trasa(x, y, n);
+    }
+    if (x+1>=0 && x+1<=7 && y-2>=0 && y-2<=7 && this.matrix[x+1][y-2] != ``) {
+      x = x+1; y = y-2; n++;
+      this.kroki.push({X: x, Y: y});
+        this.matrix[x][y] = `${n}`;
+        console.log(`6 n:${this.matrix[x][y]} x:${x} y:${y}`);
+        this.trasa(x, y, n);
+    }
+    if (x-1>=0 && x-1<=7 && y-2>=0 && y-2<=7 && this.matrix[x-1][y-2] != ``) {
+        x = x-1; y = y-2; n++;
+        this.kroki.push({X: x, Y: y});
+        this.matrix[x][y] = `${n}`;
+        console.log(`7 n:${this.matrix[x][y]} x:${x} y:${y}`);
+        this.trasa(x, y, n);
+    }
+    if (x-2>=0 && x-2<=7 && y-1>=0 && y-1<=7 && this.matrix[x-2][y-1] != ``) {
+        x= x-2; y=y-1; n++;
+        this.kroki.push({X: x, Y: y});
+        this.matrix[x][y] = `${n}`;
+        console.log(`8 n:${this.matrix[x][y]} x:${x} y:${y}`);
+        this.trasa(x, y, n);
+    }
+     else {
+      console.log("Konic drogi!");
+     }
 
-  start(x: number, y: number, matrix: string[][], n: number){
-
-    // if((x<0||x>7||y<0||y>7){
-    //   this.matrix[x][y] = `${n++}`;
-    // } else {}
-      
-    //}
-
-  }
+  }   
   test(x: number, y: number, matrix: string[][]){
    // this.krok(this.ruch2, this.n);
-    this.krok(this.ruch, this.n);
+   // this.krok(this.ruch, this.n);
+   //this.print(this.ruch, this.n);
+  // this.krok(this.ruch, this.n);
+   this.trasa(x, y, this.n)
+   this.krok(this.kroki, this.n);
   }
  
   krok(ruch: ruch[], n: number){
     const obj = interval(1000);
-    const zakres = obj.pipe(take(9));
-    zakres.subscribe((a) => {this.matrix[ruch[a].X][ruch[a].Y]= `${n++}`; this.a = a});
+    const zakres = obj.pipe(take(3));
+     zakres.subscribe((a) => {this.matrix[this.kroki[a].X][this.kroki[a].Y]= `${n++}`; this.a = a; console.log(this.matrix[ruch[a].X][ruch[a].Y])});
+//    zakres.subscribe((a) => {this.kroki[a]= this.kroki[a]; this.a = a; console.log(this.matrix[ruch[a].X][ruch[a].Y])});
+
   }
-  zeruj(m: string[][]){}
-  
+
+  zeruj(m: string[][]){
+    this.matrix = [[],[],[],[],[],[],[],[]];
+    this.n = 0;
+  }  
 }
 
-interface ruch{
+type ruch={
   X: number;
   Y: number;
 }
-interface start{
+interface trasa{
   (x:  number, y: number, matrix: string[][], n: number): number;
+}
+
+type krok={
+  X: number;
+  Y: number;
+  //R: ruch,
+  //forward: boolean;
 }
