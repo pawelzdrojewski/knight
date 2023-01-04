@@ -1,6 +1,7 @@
 
 .kontener{
 	display: flex;
+
 	justify-content: center;
 }
 .szachy {
