@@ -1,5 +1,7 @@
+
 .kontener{
-    margin: 10% 10% 10% 18%;
+	display: flex;
+	justify-content: center;
 }
 .szachy {
 	border:solid 1px #777;
