@@ -3,6 +3,7 @@
     <button type="button" class="btn btn-primary" (click)="test(x, y, tablica)">Start</button>
     <button (click)="zeruj(tablica)">Zeruj</button>
 </div>
+<input [(ngModel)]="x"  placeholder="pozycja X:"><button (click)="setStartPosition(x, 5)">Start</button>
 
 <div class="kontener">
     <table class="szachy">

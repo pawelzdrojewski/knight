@@ -1,5 +1,5 @@
 import { LocationStrategy } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { interval, take } from 'rxjs';
 
 @Component({
@@ -7,9 +7,12 @@ import { interval, take } from 'rxjs';
   templateUrl: './knight.component.html',
   styleUrls: ['./knight.component.css']
 })
+
+
 export class KnightComponent implements OnInit {
+
   y: number = 0;
-  x: number = 5;
+  x: number = 0;
   n: number = 0;
   a: number = 8;
   b: number = 8;
@@ -24,6 +27,11 @@ export class KnightComponent implements OnInit {
  flat_matrix: number[] = [];
 
  kroki: krok[] = [];
+
+ setStartPosition(x: number, y: number){
+  this.x = x
+  this.y = y
+ }
 
 ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
                { X: (this.x-2), Y: (this.y+1) }, //1
@@ -98,6 +106,7 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
     }
      else {
       console.log("Konic drogi!");
+      return
      }
 
   }   
