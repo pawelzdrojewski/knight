@@ -117,6 +117,8 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
     }
      else {
       console.log("Konic drogi!");
+      this.trasa(x = 7, y = 5 , n = n-1) //????????????????
+      
       return
      }
 
