@@ -1,0 +1,16 @@
+<H3>Punkt strtowy:</H3>
+<form [formGroup]="myForm">
+    <label id="startX">Point X: </label>
+    <input id="startX" formControlName="startX">
+    <label id="startY">Point Y: </label>
+    <input id="startY" formControlName="startY">
+</form>
+
+
+<p>X: {{myForm.value.startX}}</p>
+<p>Y: {{myForm.value.startY}}</p>
+
+<button (click)="setPoint()">Set</button>
+
+
+<H1>{{zm_form}}</H1>
