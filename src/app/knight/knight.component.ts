@@ -25,6 +25,7 @@ export class KnightComponent implements OnInit {
   n: number = 0;
   a: number = 8;
   b: number = 8;
+  i: number = 0;
 
   constructor() {}
 
@@ -59,6 +60,7 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
     this.matrix[x][y] = n;
     this.kroki.push({X: x, Y: y});
    // console.log(`n:${this.matrix[x][y]} x:${x} y:${y}`);
+   this.i = 1
     if(x-2>=0 && x-2<=7 && y+1>=0 && y+1<=7 && !(this.matrix[x-2][y+1] > 0)){ //PGG
         x = x-2; y = y+1; n++;
         this.kroki.push({X: x, Y: y});
@@ -66,6 +68,7 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
         console.log(`1 n:${this.matrix[x][y]} x:${x} y:${y}`);
         this.trasa(x, y, n)
     }
+    this.i = 2
     if (x-1>=0 && x-1<=7 && y+2>=0 && y+2<=7 && !(this.matrix[x-1][y+2] > 0)) {//PPG
         x = x-1; y = y+2; n++;
         this.kroki.push({X: x, Y: y});
@@ -73,6 +76,7 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
          console.log(`2 n:${this.matrix[x][y]} x:${x} y:${y}`);
          this.trasa(x, y, n)
     }
+    this.i = 3
     if (x+1>=0 && x+1<=7 && y+2>=0 && y+2<=7 && !(this.matrix[x+1][y+2] > 0)) { //PPD
         x = x+1; y = y+2; n++;
         this.kroki.push({X: x, Y: y});
@@ -80,6 +84,7 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
         console.log(`3 n:${this.matrix[x][y]} x:${x} y:${y}`);
         this.trasa(x, y, n)
     }
+    this.i = 4
     if (x+2>=0 && x+2<=7 && y+1>=0 && y+1<=7 && !(this.matrix[x+2][y+1] > 0)) { //PDD
         x = x+2; y = y+1; n++;
         this.matrix[x][y] = n;
@@ -87,6 +92,7 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
         console.log(`4 n:${this.matrix[x][y]} x:${x} y:${y}`);
         this.trasa(x, y, n);
     }
+    this.i = 5
     if (x+2>=0 && x+2<=7 && y-1>=0 && y-1<=7 && !(this.matrix[x+2][y-1] > 0)) {//LDD
         x = x+2; y = y-1; n++;
         this.kroki.push({X: x, Y: y});
@@ -94,6 +100,7 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
         console.log(`5 n:${this.matrix[x][y]} x:${x} y:${y}`);
         this.trasa(x, y, n);
     }
+    this.i = 6
     if (x+1>=0 && x+1<=7 && y-2>=0 && y-2<=7 && !(this.matrix[x+1][y-2] > 0)) { //LLD
       x = x+1; y = y-2; n++;
       this.kroki.push({X: x, Y: y});
@@ -101,6 +108,7 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
         console.log(`6 n:${this.matrix[x][y]} x:${x} y:${y}`);
         this.trasa(x, y, n);
     }
+    this.i = 7
     if (x-1>=0 && x-1<=7 && y-2>=0 && y-2<=7 && !(this.matrix[x-1][y-2] > 0)) { //LLG
         x = x-1; y = y-2; n++;
         this.kroki.push({X: x, Y: y});
@@ -108,6 +116,7 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
         console.log(`7 n:${this.matrix[x][y]} x:${x} y:${y}`);
         this.trasa(x, y, n);
     }
+    this.i = 8
     if (x-2>=0 && x-2<=7 && y-1>=0 && y-1<=7 && !(this.matrix[x-2][y-1] > 0)) { //LGG
         x= x-2; y=y-1; n++;
         this.kroki.push({X: x, Y: y});
@@ -116,6 +125,7 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
         this.trasa(x, y, n);
     }
      else {
+      this.trasa(this.ruch[this.i-1].X, this.ruch[this.i-1].Y, n-1)
       console.log("Konic drogi!");
       return
      }
