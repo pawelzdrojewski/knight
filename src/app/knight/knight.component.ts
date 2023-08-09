@@ -1,6 +1,6 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { interval, take } from 'rxjs';
+import { interval, last, take } from 'rxjs';
 import { PointXY } from '../point-xy';
 
 @Component({
@@ -27,15 +27,20 @@ export class KnightComponent implements OnInit {
   b: number = 8;
   i: number = 0;
 
+
+
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.punktDziecko)
+
+    this.stos.push({x: 0, y: 0, n: 0, i: 0})
+    //console.log(this.punktDziecko)
   }
  // const horse:  string = "♞";
  matrix: number[][] = [[],[],[],[],[],[],[],[]];
  tablica: number[][] = [[],[],[],[],[],[],[],[]];
 
+ stos: stos[] =[]
  flat_matrix: number[] = [];
 
  kroki: krok[] = [];
@@ -56,83 +61,109 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
                { X: (this.x-2), Y: (this.y-1) }  //8
             ];
 
-  trasa(x: number, y: number, n: number){
+  trasa(x: number, y: number, n: number, i: number){
     this.matrix[x][y] = n;
-    this.kroki.push({X: x, Y: y});
+    // this.kroki.push({X: x, Y: y});
    // console.log(`n:${this.matrix[x][y]} x:${x} y:${y}`);
-   this.i = 1
+   //this.i = 1
     if(x-2>=0 && x-2<=7 && y+1>=0 && y+1<=7 && !(this.matrix[x-2][y+1] > 0)){ //PGG
+        i = 1
         x = x-2; y = y+1; n++;
-        this.kroki.push({X: x, Y: y});
+        // this.kroki.push({X: x, Y: y});
         this.matrix[x][y] = n;
-        console.log(`1 n:${this.matrix[x][y]} x:${x} y:${y}`);
-        this.trasa(x, y, n)
+        // console.log(`1 n:${this.matrix[x][y]} x:${x} y:${y}`);
+        this.stos.push({x, y, n, i})
+        console.log(this.stos[n])
+        this.trasa(x, y, n, i)
     }
-    this.i = 2
+   // this.i = 2
     if (x-1>=0 && x-1<=7 && y+2>=0 && y+2<=7 && !(this.matrix[x-1][y+2] > 0)) {//PPG
+      i = 2
         x = x-1; y = y+2; n++;
-        this.kroki.push({X: x, Y: y});
+        // this.kroki.push({X: x, Y: y});
          this.matrix[x][y] = n;
-         console.log(`2 n:${this.matrix[x][y]} x:${x} y:${y}`);
-         this.trasa(x, y, n)
+        //  console.log(`2 n:${this.matrix[x][y]} x:${x} y:${y}`);
+         this.stos.push({x, y, n, i})
+         console.log(this.stos[n])
+         this.trasa(x, y, n, i)
     }
-    this.i = 3
+    // this.i = 3
     if (x+1>=0 && x+1<=7 && y+2>=0 && y+2<=7 && !(this.matrix[x+1][y+2] > 0)) { //PPD
+      i = 3
         x = x+1; y = y+2; n++;
-        this.kroki.push({X: x, Y: y});
+        // this.kroki.push({X: x, Y: y});
         this.matrix[x][y] = n;
-        console.log(`3 n:${this.matrix[x][y]} x:${x} y:${y}`);
-        this.trasa(x, y, n)
+        // console.log(`3 n:${this.matrix[x][y]} x:${x} y:${y}`);
+        this.stos.push({x, y, n, i})
+         console.log(this.stos[n])
+        this.trasa(x, y, n, i)
     }
-    this.i = 4
+    // this.i = 4
     if (x+2>=0 && x+2<=7 && y+1>=0 && y+1<=7 && !(this.matrix[x+2][y+1] > 0)) { //PDD
+      i = 4
         x = x+2; y = y+1; n++;
         this.matrix[x][y] = n;
-        this.kroki.push({X: x, Y: y});
-        console.log(`4 n:${this.matrix[x][y]} x:${x} y:${y}`);
-        this.trasa(x, y, n);
+        // this.kroki.push({X: x, Y: y});
+        // console.log(`4 n:${this.matrix[x][y]} x:${x} y:${y}`);
+        this.stos.push({x, y, n, i})
+         console.log(this.stos[n])
+        this.trasa(x, y, n, i);
     }
-    this.i = 5
+    // this.i = 5
     if (x+2>=0 && x+2<=7 && y-1>=0 && y-1<=7 && !(this.matrix[x+2][y-1] > 0)) {//LDD
+        i = 5
         x = x+2; y = y-1; n++;
-        this.kroki.push({X: x, Y: y});
+        // this.kroki.push({X: x, Y: y});
         this.matrix[x][y] = n;
-        console.log(`5 n:${this.matrix[x][y]} x:${x} y:${y}`);
-        this.trasa(x, y, n);
+        // console.log(`5 n:${this.matrix[x][y]} x:${x} y:${y}`);
+        this.stos.push({x, y, n, i})
+         console.log(this.stos[n])
+        this.trasa(x, y, n, i);
     }
-    this.i = 6
+    // this.i = 6
     if (x+1>=0 && x+1<=7 && y-2>=0 && y-2<=7 && !(this.matrix[x+1][y-2] > 0)) { //LLD
+      i = 6
       x = x+1; y = y-2; n++;
-      this.kroki.push({X: x, Y: y});
+      // this.kroki.push({X: x, Y: y});
         this.matrix[x][y] = n;
-        console.log(`6 n:${this.matrix[x][y]} x:${x} y:${y}`);
-        this.trasa(x, y, n);
+        // console.log(`6 n:${this.matrix[x][y]} x:${x} y:${y}`);
+        this.stos.push({x, y, n, i})
+         console.log(this.stos[n])
+        this.trasa(this.stos[n].x, this.stos[n].y, n,  i);
     }
-    this.i = 7
+    // this.i = 7
     if (x-1>=0 && x-1<=7 && y-2>=0 && y-2<=7 && !(this.matrix[x-1][y-2] > 0)) { //LLG
+      i = 7
         x = x-1; y = y-2; n++;
-        this.kroki.push({X: x, Y: y});
+        // this.kroki.push({X: x, Y: y});
         this.matrix[x][y] = n;
-        console.log(`7 n:${this.matrix[x][y]} x:${x} y:${y}`);
-        this.trasa(x, y, n);
+        // console.log(`7 n:${this.matrix[x][y]} x:${x} y:${y}`);
+        this.stos.push({x, y, n, i})
+         console.log(this.stos[n])
+        this.trasa(x, y, n, i);
     }
-    this.i = 8
+    // this.i = 8
     if (x-2>=0 && x-2<=7 && y-1>=0 && y-1<=7 && !(this.matrix[x-2][y-1] > 0)) { //LGG
+        i = 8
         x= x-2; y=y-1; n++;
-        this.kroki.push({X: x, Y: y});
+        // this.kroki.push({X: x, Y: y});
         this.matrix[x][y] = n;
-        console.log(`8 n:${this.matrix[x][y]} x:${x} y:${y}`);
-        this.trasa(x, y, n);
+        // console.log(`8 n:${this.matrix[x][y]} x:${x} y:${y}`);
+        this.stos.push({x, y, n, i})
+         console.log(this.stos[n])
+        this.trasa(x, y, n, i);
     }
      else {
-      this.trasa(this.ruch[this.i-1].X, this.ruch[this.i-1].Y, n-1)
       console.log("Konic drogi!");
-      return
+      //this.stos.splice(-1);
+      this.stos[n].n = 0
+      this.trasa(this.stos[n-1].x, this.stos[n-1].y, this.stos[n-1].n, this.stos[n-1].i)
+     // return
      }
 
   }   
   test(x: number, y: number, matrix: number[][]){
-   this.trasa(x, y, 0)
+   this.trasa(this.stos[0].n, this.stos[0].x, this.stos[0].y, this.stos[0].i)
    this.krok();
   }
  
@@ -145,6 +176,7 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
   zeruj(m: number[][]){
     this.matrix = [[],[],[],[],[],[],[],[]];
     this.tablica = [[],[],[],[],[],[],[],[]];
+    this.stos = [];
     this.n = 0;
   }  
 }
@@ -160,4 +192,10 @@ interface trasa{
 type krok={
   X: number;
   Y: number;
+}
+interface stos{
+  x: number,
+  y: number,
+  n: number,
+  i: number
 }

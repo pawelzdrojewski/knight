@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="p-5">
     <H1>x: {{this.punktDziecko?.x}} y:{{this.punktDziecko?.y}}</H1>
     <div class="col col-md-12">
@@ -10,8 +10,13 @@
     <button type="button" class="btn btn-primary" (click)="test(x, y, tablica)">Start</button>
     <button (click)="zeruj(tablica)">Zeruj</button>
 </div>
-<input [(ngModel)]="x"  placeholder="pozycja X:"><button (click)="setStartPosition(x, 5)">Start</button>
+<input [(ngModel)]="x"  placeholder="pozycja X:">
+<button class=" btn btn-primary"(click)="setStartPosition(x, 5)">Start</button> -->
 
+<div class="p-5"></div>
+<div class="kontener">
+    <button type="button" class="btn btn-primary" (click)="test(x, y, tablica)">Start</button>
+</div>
 <div class="kontener">
     <table class="szachy">
         <tbody>
@@ -181,5 +186,4 @@
         </tbody>                -->
     </table>    
 <div>{{this.a}}</div>   
-</div>
 </div>
