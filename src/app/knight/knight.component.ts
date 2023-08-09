@@ -1,6 +1,7 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { interval, take } from 'rxjs';
+import { PointXY } from '../point-xy';
 
 @Component({
   selector: 'app-knight',
@@ -11,6 +12,14 @@ import { interval, take } from 'rxjs';
 
 export class KnightComponent implements OnInit {
 
+
+  //@Input() private point?: PointXY
+  //@Input() dziecko?: string
+
+  @Input() punktDziecko?: PointXY
+
+  zm_king?: number = 11
+
   y: number = 0;
   x: number = 0;
   n: number = 0;
@@ -19,7 +28,9 @@ export class KnightComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.punktDziecko)
+  }
  // const horse:  string = "♞";
  matrix: number[][] = [[],[],[],[],[],[],[],[]];
  tablica: number[][] = [[],[],[],[],[],[],[],[]];

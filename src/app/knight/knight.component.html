@@ -1,4 +1,11 @@
+
 <div class="p-5">
+    <H1>x: {{this.punktDziecko?.x}} y:{{this.punktDziecko?.y}}</H1>
+    <div class="col col-md-12">
+        <div class="row">
+                <app-form [zm_form]="zm_king"></app-form>
+        </div>
+    </div>
 <div class="kontener">
     <button type="button" class="btn btn-primary" (click)="test(x, y, tablica)">Start</button>
     <button (click)="zeruj(tablica)">Zeruj</button>
