@@ -41,7 +41,7 @@ export class KnightComponent implements OnInit {
  tablica: number[][] = [[],[],[],[],[],[],[],[]];
 
  stos: stos[] =[]
- wynik = of(this.stos)
+ //wynik = of(this.stos)
  flat_matrix: number[] = [];
 
  kroki: krok[] = [];
@@ -156,10 +156,10 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
     }
      else {
       console.log("Konic drogi!");
-       //this.stos.splice(-1);
-      // this.stos[n].n = 0
-       //this.kroki.splice(-1)
-     // this.trasa(this.stos[n-1].x, this.stos[n-1].y, this.stos[n-1].n, this.stos[n-1].i)
+       this.stos.splice(-1);
+     //  this.stos[n].n = 0
+        this.kroki.splice(-1)
+      this.trasa(this.stos[n-1].x, this.stos[n-1].y, this.stos[n-1].n, this.stos[n-1].i)
        return
      }
 
@@ -170,9 +170,11 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
   }
  
   krok(){
-    interval(1000).pipe(take(57), tap((a) => {this.tablica[this.kroki[a].X][this.kroki[a].Y] = this.matrix[this.kroki[a].X][this.kroki[a].Y]; this.a = a;})).subscribe();
-    // zakres.subscribe();
-     this.wynik.pipe(delayWhen(() => interval(5000)), map((a) => {console.log(a)})).subscribe();
+    const interval$ = interval(500)
+    const potok$ = interval$.pipe(take(128), 
+                                  tap((a) => {this.tablica[this.kroki[a].X][this.kroki[a].Y] = this.matrix[this.kroki[a].X][this.kroki[a].Y]; this.a = a;})).subscribe();
+
+
   }
 
   zeruj(m: number[][]){
