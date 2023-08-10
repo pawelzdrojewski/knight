@@ -1,6 +1,6 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable, delay, interval, last, map, of, take } from 'rxjs';
+import { Observable, delay, delayWhen, interval, last, map, of, take, tap } from 'rxjs';
 import { PointXY } from '../point-xy';
 
 @Component({
@@ -156,11 +156,11 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
     }
      else {
       console.log("Konic drogi!");
-    //   this.stos.splice(-1);
-    //  // this.stos[n].n = 0
-    //   this.kroki.splice(-1)
-    //   this.trasa(this.stos[n-1].x, this.stos[n-1].y, this.stos[n-1].n, this.stos[n-1].i)
-    //   return
+       //this.stos.splice(-1);
+      // this.stos[n].n = 0
+       //this.kroki.splice(-1)
+     // this.trasa(this.stos[n-1].x, this.stos[n-1].y, this.stos[n-1].n, this.stos[n-1].i)
+       return
      }
 
   }   
@@ -170,10 +170,9 @@ ruch: ruch[] =[{ X: (this.x  ), Y: (this.y  ) }, //0
   }
  
   krok(){
-    //const obj = interval(1000);
-   // const zakres = obj.pipe(take(57));
-     //zakres.subscribe((a) => {this.tablica[this.kroki[a].X][this.kroki[a].Y] = this.matrix[this.kroki[a].X][this.kroki[a].Y]; this.a = a;});
-     this.wynik.pipe(delay(5000), map(a=>{console.log(a)})).subscribe()
+    interval(1000).pipe(take(57), tap((a) => {this.tablica[this.kroki[a].X][this.kroki[a].Y] = this.matrix[this.kroki[a].X][this.kroki[a].Y]; this.a = a;})).subscribe();
+    // zakres.subscribe();
+     this.wynik.pipe(delayWhen(() => interval(5000)), map((a) => {console.log(a)})).subscribe();
   }
 
   zeruj(m: number[][]){
